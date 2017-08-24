@@ -12,13 +12,15 @@ public class News {
     private String author;
     private String publishedDate;
     private String imageLink;
+    private String webUrl;
 
-    public News(String sectionName, String title, String author, String publishedDate,String imageLink) {
+    public News(String sectionName, String title, String author, String publishedDate,String imageLink,String webUrl) {
         SectionName = sectionName;
         Title = title;
         this.author = author;
         this.publishedDate = publishedDate;
         this.imageLink=imageLink;
+        this.webUrl=webUrl;
     }
 
     public String getSectionName() {
@@ -59,5 +61,9 @@ public class News {
 
     public void setImageLink(String imageLink) {
         this.imageLink = imageLink;
+    }
+
+    public String getWebUrl() {
+        return webUrl;
     }
 }

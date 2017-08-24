@@ -34,10 +34,10 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<News>> {
 
     public static final String LOG_TAG = MainActivity.class.getName();
-    private static String BASE_URL ="http://content.guardianapis.com/search?section=";
-    private static String SECOND_URL= "&page-size=18&api-key=test&show-fields=thumbnail&show-tags=contributor”;
+    private static String BASE_URL =
+            "http://content.guardianapis.com/search?q=android&page-size=18&api-key=test&show-fields=thumbnail&show-tags=contributor”;
 
-    private static final String FULL_URL= BASE_URL+user_entry+SECOND_URL;
+
     /**
      * Constant value for the earthquake loader ID. We can choose any integer.
      * This really only comes into play if you're using multiple loaders.
@@ -106,7 +106,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         listNews.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String url = "http://www.example.com";
+                News newsUrl=(News)adapterView.getItemAtPosition(i);
+                String url = newsUrl.getWebUrl();
                 Intent web = new Intent(Intent.ACTION_VIEW);
                 web.setData(Uri.parse(url));
                 startActivity(web);
@@ -117,9 +118,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public Loader<List<News>> onCreateLoader(int i, Bundle bundle) {
-        String query = editText.getText().toString();
+        String q = editText.getText().toString();
 
-        return new NewsAsyncTaskLoader(this, FULL_URL + query);
+        return new NewsAsyncTaskLoader(this, BASE_URL +q);
     }
 
     @Override
