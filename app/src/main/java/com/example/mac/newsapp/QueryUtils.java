@@ -113,6 +113,7 @@ public class QueryUtils {
         String author = "";
         String publishedDate = "";
         String imageLink = "";
+        String webUrl="";
 
         // Create an empty ArrayList that we can start adding earthquakes to
         ArrayList<News> books = new ArrayList<>();
@@ -147,7 +148,7 @@ public class QueryUtils {
                     imageLink = ilink.getString("thumbnail");
                 }
 
-                News news = new News(SectionName,Title,author,publishedDate,imageLink);
+                News news = new News(SectionName,Title,author,publishedDate,imageLink,webUrl);
                 books.add(news);
 
 

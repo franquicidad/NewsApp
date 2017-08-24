@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     public static final String LOG_TAG = MainActivity.class.getName();
     private static String BASE_URL =
-            "http://content.guardianapis.com/search?q=&page-size=18&api-key=test&show-fields=thumbnail&show-tags=contributor”;
+            "http://content.guardianapis.com/search?q=&page-size=18&api-key=test&show-fields=thumbnail&show-tags=contributor";
 
 
     /**
