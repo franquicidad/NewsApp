@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     public static final String LOG_TAG = MainActivity.class.getName();
     private static String BASE_URL =
-            "http://content.guardianapis.com/search?q=&page-size=18&api-key=test&show-fields=thumbnail&show-tags=contributor";
+            "http://content.guardianapis.com/search?page-size=18&api-key=test&show-fields=thumbnail&show-tags=contributor&q=";
 
 
     /**
@@ -43,9 +43,13 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
      * This really only comes into play if you're using multiple loaders.
      */
     private static final int NEWS_LOADER_ID = 1;
+
     private NewsAdapter adapter;
+
     private ListView listNews;
+
     private EditText editText;
+
     private Button search;
 
     private TextView mEmptyStateTextView;
@@ -63,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         mEmptyStateTextView = (TextView) findViewById(R.id.empty_view);
         listNews.setEmptyView(mEmptyStateTextView);
 
-        adapter = new NewsAdapter(getBaseContext(),new ArrayList<News>());
+        adapter = new NewsAdapter(getBaseContext(), new ArrayList<News>());
 
         final LoaderManager loaderManager = getSupportLoaderManager();
         loaderManager.initLoader(NEWS_LOADER_ID, null, MainActivity.this);
@@ -73,6 +77,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         //Missing new AsyncTask
 
         search.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
 
@@ -85,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
                 // If there is a network connection, fetch data
                 if (networkInfo != null && networkInfo.isConnected()) {
+
                     // Get a reference to the LoaderManager, in order to interact with loaders.
                     LoaderManager loaderManager = getSupportLoaderManager();
 
@@ -104,9 +110,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         });
 
         listNews.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                News newsUrl=(News)adapterView.getItemAtPosition(i);
+                News newsUrl=(News) adapterView.getItemAtPosition(i);
                 String url = newsUrl.getWebUrl();
                 Intent web = new Intent(Intent.ACTION_VIEW);
                 web.setData(Uri.parse(url));
@@ -125,6 +132,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public void onLoadFinished(Loader<List<News>> loader, List<News> data) {
+
         adapter.clear();
         if (data != null) {
             adapter.addAll(data);
@@ -134,6 +142,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public void onLoaderReset(Loader<List<News>> loader) {
+
         adapter.clear();
 
     }
