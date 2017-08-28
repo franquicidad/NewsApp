@@ -134,8 +134,10 @@ public class QueryUtils {
                 }
                 if (currentnews.has("tags")) {
                     JSONArray tag= currentnews.getJSONArray("tags");
-                    JSONObject firstname=tag.getJSONObject("firstName");
-                    firstNameAuthor = firstname.getString("firstName");
+                    if(tag > 0) {
+                        JSONObject firstname = tag.getJSONObject(0);
+                        firstNameAuthor = firstname.getString("id");
+                    }
                 }
                 if (currentnews.has("publishedDate"))
                     publishedDate = currentnews.getString("publishedDate");
