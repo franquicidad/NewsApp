@@ -9,15 +9,17 @@ public class News {
 
     private String SectionName;
     private String Title;
-    private String author;
+    private String firstNameAuthor;
+    private String secondNameAuthor;
     private String publishedDate;
     private String imageLink;
     private String webUrl;
 
-    public News(String sectionName, String title, String author, String publishedDate, String imageLink, String webUrl) {
+    public News(String sectionName, String title, String firstNameAuthor,String secondNameAuthor, String publishedDate, String imageLink, String webUrl) {
         SectionName = sectionName;
         Title = title;
-        this.author = author;
+        this.firstNameAuthor = firstNameAuthor;
+        this.secondNameAuthor=secondNameAuthor;
         this.publishedDate = publishedDate;
         this.imageLink = imageLink;
         this.webUrl = webUrl;
@@ -39,13 +41,7 @@ public class News {
         Title = title;
     }
 
-    public String getAuthor() {
-        return author;
-    }
 
-    public void setAuthor(String author) {
-        this.author = author;
-    }
 
     public String getPublishedDate() {
         return publishedDate;
@@ -69,6 +65,22 @@ public class News {
 
     public void setWebUrl(String webUrl) {
         this.webUrl = webUrl;
+    }
+
+    public void setFirstNameAuthor(String firstNameAuthor) {
+        this.firstNameAuthor = firstNameAuthor;
+    }
+
+    public void setSecondNameAuthor(String secondNameAuthor) {
+        this.secondNameAuthor = secondNameAuthor;
+    }
+
+    public String getFirstNameAuthor() {
+        return firstNameAuthor;
+    }
+
+    public String getSecondNameAuthor() {
+        return secondNameAuthor;
     }
 }
 

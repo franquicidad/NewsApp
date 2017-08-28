@@ -110,46 +110,42 @@ public class QueryUtils {
     public static ArrayList<News> extractNewsItems(String jsonResponse) {
         String SectionName = "";
         String Title="";
-        String author = "";
+        String firstNameAuthor = "";
+        String secondNameAuthor="";
         String publishedDate = "";
         String imageLink = "";
         String webUrl="";
-
         // Create an empty ArrayList that we can start adding earthquakes to
         ArrayList<News> books = new ArrayList<>();
-        // Try to parse the SAMPLE_JSON_RESPONSE. If there's a problem with the way the JSON
-        // is formatted, a JSONException exception object will be thrown.
-        // Catch the exception so the app doesn't crash, and print the error message to the logs.
         try {
             JSONObject baseJsonResponce = new JSONObject(jsonResponse);
-            JSONObject newsArray = baseJsonResponce.getJSONObject("response");
+            JSONObject newsObject = baseJsonResponce.getJSONObject("response");
+            JSONArray results = newsObject.getJSONArray("results");
 
+            for (int i = 0; i < newsObject.length(); i++) {
 
-            for (int i = 0; i < newsArray.length(); i++) {
+                JSONObject currentnews = results.getJSONObject(i);
 
-                JSONObject currentnews = newsArray.getJSONObject(i);
-                JSONArray results = currentnews.getJSONArray("results");
-
-
-                if (results.has("sectionId")) {
-                    SectionName = results.getString("sectionId");
+                if (currentnews.has("sectionId")) {
+                    SectionName = currentnews.getString("sectionId");
                 }
-                if(results.has("webTitle")){
-                    Title=results.getString("webTitle");
+                if(currentnews.has("webTitle")){
+                    Title=currentnews.getString("webTitle");
                 }
-                if (results.has("firstName"+"lastName")) { //continue from here missing authors!
-                    JSONObject tag= results.getJSONObject("tags");
-                    author = tag.getString("firstName"+"lastName");
+                if (currentnews.has("tags")) {
+                    JSONArray tag= currentnews.getJSONArray("tags");
+                    JSONObject firstname=tag.getJSONObject("firstName");
+                    firstNameAuthor = firstname.getString("firstName");
                 }
-                if (results.has("publishedDate"))
-                    publishedDate = results.getString("publishedDate");
+                if (currentnews.has("publishedDate"))
+                    publishedDate = currentnews.getString("publishedDate");
 
-                if (results.has("imageLinks")) {
-                    JSONObject ilink = results.getJSONObject("imageLinks");
+                if (currentnews.has("imageLinks")) {
+                    JSONObject ilink = currentnews.getJSONObject("imageLinks");
                     imageLink = ilink.getString("thumbnail");
                 }
 
-                News news = new News(SectionName,Title,author,publishedDate,imageLink,webUrl);
+                News news = new News(SectionName,Title,firstNameAuthor,secondNameAuthor,publishedDate,imageLink,webUrl);
                 books.add(news);
 
 
