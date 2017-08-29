@@ -139,12 +139,16 @@ public class QueryUtils {
                         firstNameAuthor = firstname.getString("id");
                     }
                 }
-                if (currentnews.has("publishedDate"))
-                    publishedDate = currentnews.getString("publishedDate");
+                if (currentnews.has("webPublicationDate"))
+                    publishedDate = currentnews.getString("webPublicationDate");
 
-                if (currentnews.has("imageLinks")) {
-                    JSONObject ilink = currentnews.getJSONObject("imageLinks");
+                if (currentnews.has("fields")) {
+                    JSONObject ilink = currentnews.getJSONObject("fields");
                     imageLink = ilink.getString("thumbnail");
+                }
+                if(currentnews.has("webUrl")){
+                    JSONObject weblink=currentnews.getJSONObject("webUrl");
+                    webUrl= weblink.getString("webUrl");
                 }
 
                 News news = new News(SectionName,Title,firstNameAuthor,secondNameAuthor,publishedDate,imageLink,webUrl);

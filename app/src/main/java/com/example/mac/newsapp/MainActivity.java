@@ -1,5 +1,6 @@
 package com.example.mac.newsapp;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -54,6 +55,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     private TextView mEmptyStateTextView;
 
+    private boolean isFirstSearch=true;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,8 +72,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         adapter = new NewsAdapter(getBaseContext(), new ArrayList<News>());
 
-        final LoaderManager loaderManager = getSupportLoaderManager();
-        loaderManager.initLoader(NEWS_LOADER_ID, null, MainActivity.this);
+
 
         listNews.setAdapter(adapter);
 
@@ -97,7 +99,13 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                     // Initialize the loader. Pass in the int ID constant defined above and pass in null for
                     // the bundle. Pass in this activity for the LoaderCallbacks parameter (which is valid
                     // because this activity implements the LoaderCallbacks interface).
-                    loaderManager.initLoader(NEWS_LOADER_ID, null, MainActivity.this);
+                    if(isFirstSearch){
+                        loaderManager.initLoader(NEWS_LOADER_ID, null, MainActivity.this);
+                        isFirstSearch=false;
+                    }else{
+                        loaderManager.restartLoader(NEWS_LOADER_ID, null, MainActivity.this);
+
+                    }
                 } else {
 
                     // Update empty state with no connection error message
@@ -105,7 +113,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 }
 
                 //Missing new AsyncTask
-                loaderManager.restartLoader(NEWS_LOADER_ID, null, MainActivity.this);
             }
         });
 
@@ -117,7 +124,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 String url = newsUrl.getWebUrl();
                 Intent web = new Intent(Intent.ACTION_VIEW);
                 web.setData(Uri.parse(url));
-                startActivity(web);
+                try {
+                    startActivity(web);
+                }catch (ActivityNotFoundException e){
+                    Log.e(LOG_TAG,"No Activity");
+                }
             }
         });
 
@@ -137,7 +148,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         if (data != null) {
             adapter.addAll(data);
         }
-        adapter.notifyDataSetChanged();
+
     }
 
     @Override
