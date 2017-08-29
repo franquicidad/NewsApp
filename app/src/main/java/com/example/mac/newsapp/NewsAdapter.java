@@ -48,6 +48,10 @@ public class NewsAdapter extends ArrayAdapter<News> {
 
         newsImage=(ImageView)v.findViewById(R.id.news_image);
 
+        if (!TextUtils.isEmpty(newsPosition.getImageLink())) {
+            Picasso.with(getContext()).load(newsPosition.getImageLink()).into(newsImage);
+        }
+
         Section = (TextView) v.findViewById(R.id.section);
         Section.setText("Section:" + newsPosition.getSectionName());
 
@@ -60,9 +64,7 @@ public class NewsAdapter extends ArrayAdapter<News> {
         publishedDate = (TextView) v.findViewById(R.id.published_date);
         publishedDate.setText("Published date:" + newsPosition.getPublishedDate());
 
-        if (!TextUtils.isEmpty(newsPosition.getImageLink())) {
-            Picasso.with(getContext()).load(newsPosition.getImageLink()).into(newsImage);
-        }
+
 
 
 
