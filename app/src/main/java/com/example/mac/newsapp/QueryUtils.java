@@ -147,8 +147,8 @@ public class QueryUtils {
                     imageLink = ilink.getString("thumbnail");
                 }
                 if(currentnews.has("webUrl")){
-                    JSONObject weblink =currentnews.getJSONObject("webUrl");
-                    webUrl= weblink.getString("webUrl");
+                    String weblink =currentnews.getString("webUrl");
+
                 }
 
                 News news = new News(SectionName,Title,firstNameAuthor,secondNameAuthor,publishedDate,imageLink,webUrl);
