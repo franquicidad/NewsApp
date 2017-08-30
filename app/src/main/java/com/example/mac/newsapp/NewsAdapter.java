@@ -68,8 +68,10 @@ public class NewsAdapter extends ArrayAdapter<News> {
         Title.setText("Title:" + newsPosition.getTitle());
 
         author = (TextView) v.findViewById(R.id.author);
-        author.setText("Author:" + newsPosition.getFirstNameAuthor() + newsPosition.getSecondNameAuthor());
 
+        String cadena = (newsPosition.getFirstNameAuthor() + " " +newsPosition.getSecondNameAuthor());
+        author.setText("Author:" + cadena.substring(8));
+        //author.setText("Author:" + newsPosition.getFirstNameAuthor() + newsPosition.getSecondNameAuthor());
 
         // Create a new Date object from the time in milliseconds of the earthquake
 //        Date dateObject = new Date(newsPosition.getPublishedDate());

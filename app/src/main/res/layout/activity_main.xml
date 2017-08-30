@@ -12,7 +12,7 @@
         android:layout_height="wrap_content">
         <EditText
             android:id="@+id/Edit"
-            android:hint="Enter your Headline search"
+            android:hint="@string/enter_your_headline_search"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             />
@@ -41,7 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="No results found"
+            android:text="@string/please_enter_the_search_topic"
             android:textAppearance="?android:textAppearanceMedium"/>
     </RelativeLayout>
 

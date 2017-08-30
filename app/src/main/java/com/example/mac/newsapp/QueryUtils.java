@@ -26,6 +26,7 @@ import static com.example.mac.newsapp.MainActivity.LOG_TAG;
 
 public class QueryUtils {
 
+
     /**
      * Create a private constructor because no one should ever create a {@link QueryUtils} object.
      * This class is only meant to hold static variables and methods, which can be accessed
@@ -115,6 +116,7 @@ public class QueryUtils {
         String publishedDate = "";
         String imageLink = "";
         String webUrl="";
+
         // Create an empty ArrayList that we can start adding earthquakes to
         ArrayList<News> books = new ArrayList<>();
         try {
@@ -147,7 +149,7 @@ public class QueryUtils {
                     imageLink = ilink.getString("thumbnail");
                 }
                 if(currentnews.has("webUrl")){
-                    String weblink =currentnews.getString("webUrl");
+                     webUrl=currentnews.getString("webUrl");
 
                 }
 
